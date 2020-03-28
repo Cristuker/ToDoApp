@@ -93,16 +93,14 @@ const MyModal = () => {
         if (title === '')
             return handleOpenSnackbar()
 
-
-        const task = {}
+        let task = {}
         task.title = title
-        console.log('task', task)
-        console.log('title', title)
+        task.status  = 'pending'
+        console.log('taskabsda',task)
         postTask(JSON.stringify(task))
         setTimeout(() => {
             handleClose();
         }, 500)
-
     }
 
     return (
@@ -123,7 +121,6 @@ const MyModal = () => {
                     <div className={classes.paper}>
                         <form onSubmit={handleSave} >
                             <h3 className={classes.title} >Criar tarefa</h3>
-                            {/* validar o campo titulo */}
                             <TextField value={title} onChange={e => setTitle(e.target.value)} className={classes.input} label="Titutlo da tarefa" size="small" ></TextField><br />
                             <Button onClick={handleSave} variant="contained" color="primary" className={classes.create}>Criar</Button>
                             <Button onClick={handleClose} variant="contained" color="secondary">Cancelar</Button>

@@ -8,59 +8,60 @@ import 'typeface-roboto';
 
 
 
-let tasks = [{
-  title: 'Its a task',
-  time: '00:10',
-  status: 'pending'
-},
-{
-  title: 'its no a task',
-  time: '00:20',
-  status: 'done'
-},
-{
-  title: 'React boys',
-  time: '09:00',
-  status: 'pending'
-},
-{
-  title: 'its nk',
-  time: '24:00',
-  status: 'done'
-}, {
-  title: 'task',
-  time: '20:40',
-  status: 'done'
-}, {
-  title: 'itsk',
-  time: '03:20',
-  status: 'pending'
-}, {
-  title: 'task',
-  time: '21:40',
-  status: 'pending'
-},
-{
-  title: 'its nsdasda a task',
-  time: '05:60',
-  status: 'pending'
-},
-{
-  title: 'its no\dgfsdf a task',
-  time: '59:60',
-  status: 'pending'
-},
-{
-  title: 'its no adjdjbsd task',
-  time: '45:60',
-  status: 'pending'
-},
-{
-  title: 'its vajdsdfntask',
-  time: '50:60',
-  status: 'done'
-}]
 
+//  console.log('tasksasd',tasks)
+ let tasks = [{
+   title: 'Its a task',
+   time: '00:10',
+   status: 'pending'
+ },
+ {
+   title: 'its no a task',
+   time: '00:20',
+   status: 'done'
+ },
+ {
+   title: 'React boys',
+   time: '09:00',
+   status: 'pending'
+ },
+ {
+   title: 'its nk',
+   time: '24:00',
+   status: 'done'
+ }, {
+   title: 'task',
+   time: '20:40',
+   status: 'done'
+ }, {
+   title: 'itsk',
+   time: '03:20',
+   status: 'pending'
+ }, {
+   title: 'task',
+   time: '21:40',
+   status: 'pending'
+ },
+ {
+   title: 'its nsdasda a task',
+   time: '05:60',
+   status: 'pending'
+ },
+ {
+   title: 'its no\dgfsdf a task',
+   time: '59:60',
+   status: 'pending'
+ },
+ {
+   title: 'its no adjdjbsd task',
+   time: '45:60',
+   status: 'pending'
+ },
+ {
+   title: 'its vajdsdfntask',
+   time: '50:60',
+   status: 'done'
+ }]
 
 const useStyles = makeStyles(theme => ({
   mainBox: {
@@ -111,15 +112,14 @@ function App() {
   const classes = useStyles();
 
 
-
   return (
 
     <ThemeProvider theme={theme}>
       <Typography variant="h1" component="h2" className={classes.title} >
-        <FontAwesomeIcon icon={faTasks} /> To Do List
+        <FontAwesomeIcon icon={faTasks} /> TO DO LIST
       </Typography>
       <Container className={classes.mainBox}>
-        <Tasks tasks={tasks} className={classes.navbar} ></Tasks>
+        <Tasks className={classes.navbar} ></Tasks>
         <Fab variant="round" aria-label="add" color="secondary" className={classes.addButton}><CreateTask></CreateTask></Fab>
       </Container>
       <Container className={classes.container} >

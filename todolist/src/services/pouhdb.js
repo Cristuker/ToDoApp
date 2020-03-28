@@ -1,7 +1,5 @@
-import PouchDB, { redrawTodosUI } from 'pouchdb-browser';
+import PouchDB from 'pouchdb-browser';
 const todoDB = new PouchDB('todo_db');
-
-const remoteCouch = false;
 
     const postTask = (task) =>{
 
@@ -9,7 +7,6 @@ const remoteCouch = false;
             _id: new Date().toISOString(),
             title: task.title,
             status: task.status,
-            time: task.time
         }
     
         todoDB.put(taskToBeSaved, (err, result)=>{
@@ -20,11 +17,14 @@ const remoteCouch = false;
         })
     }
 
-    const showTodos = () =>{
-        todoDB.allDocs({ include_docs: true, descending: true},(err,doc) =>{
-            console.log('doc',doc)
-            //redrawTodosUI(doc.rows);
+    const showTodos = async () =>{
+        let data;
+
+        await todoDB.allDocs({ include_docs: true, descending: true},(err,doc) =>{
+            data = doc
         })
+        return data;
     }
 
-export { postTask, showTodos};
+
+export { postTask, showTodos };
