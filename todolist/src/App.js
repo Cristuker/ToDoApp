@@ -2,15 +2,11 @@ import React from 'react';
 import { Container, createMuiTheme, ThemeProvider, Typography, makeStyles, Fab } from '@material-ui/core';
 import { faTasks, faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tasks from './Components/Tasks/index';
+import Tasks from './Components/Navbar/index';
 import CreateTask from './Components/createTask/index';
+import Routes from './routes';
 import 'typeface-roboto';
 
-
-
-
-//  console.log('tasksasd',tasks)
- 
 const useStyles = makeStyles(theme => ({
   mainBox: {
     marginTop: '60px',
@@ -70,6 +66,8 @@ function App() {
         <Tasks className={classes.navbar} ></Tasks>
         <Fab variant="round" aria-label="add" color="secondary" className={classes.addButton}><CreateTask></CreateTask></Fab>
       </Container>
+
+    <Routes />
       <Container className={classes.container} >
         <Typography variant="h3" component="h2" className={classes.footer} >
           <FontAwesomeIcon icon={faClock} /> Tempo gasto: 10:00
