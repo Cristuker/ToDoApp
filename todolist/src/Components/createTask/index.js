@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
         cursor: 'pointer'
     },
     title: {
-        float: 'left'
+        float: 'left',
+        fontFamily: "'Noto Sans JP', sans-serif"
     },
     time: {
         float: 'right'
@@ -50,10 +51,6 @@ const useStyles = makeStyles(theme => ({
     },
     input: {
         marginBottom: '30px'
-    },
-    title: {
-        fontFamily: "'Noto Sans JP', sans-serif"
-
     },
     warning:{
         top:'40em'
@@ -120,7 +117,7 @@ const MyModal = () => {
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <form onSubmit={handleSave} >
-                            <h3 className={classes.title} >Criar tarefa</h3>
+                            <h3 className={classes.title} >Criar tarefa</h3><br />
                             <TextField value={title} onChange={e => setTitle(e.target.value)} className={classes.input} label="Titutlo da tarefa" size="small" ></TextField><br />
                             <Button onClick={handleSave} variant="contained" color="primary" className={classes.create}>Criar</Button>
                             <Button onClick={handleClose} variant="contained" color="secondary">Cancelar</Button>
@@ -130,7 +127,7 @@ const MyModal = () => {
             </Modal>
             <Snackbar className={classes.warning} key={`bottom,center`} open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                 <Alert onClose={handleCloseSnackbar} severity="error">
-                    Você pode criar uma tarefa sem titulo
+                    Adicione um titulo
                 </Alert>
             </Snackbar>
         </Container>)

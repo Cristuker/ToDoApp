@@ -10,59 +10,7 @@ import 'typeface-roboto';
 
 
 //  console.log('tasksasd',tasks)
- let tasks = [{
-   title: 'Its a task',
-   time: '00:10',
-   status: 'pending'
- },
- {
-   title: 'its no a task',
-   time: '00:20',
-   status: 'done'
- },
- {
-   title: 'React boys',
-   time: '09:00',
-   status: 'pending'
- },
- {
-   title: 'its nk',
-   time: '24:00',
-   status: 'done'
- }, {
-   title: 'task',
-   time: '20:40',
-   status: 'done'
- }, {
-   title: 'itsk',
-   time: '03:20',
-   status: 'pending'
- }, {
-   title: 'task',
-   time: '21:40',
-   status: 'pending'
- },
- {
-   title: 'its nsdasda a task',
-   time: '05:60',
-   status: 'pending'
- },
- {
-   title: 'its no\dgfsdf a task',
-   time: '59:60',
-   status: 'pending'
- },
- {
-   title: 'its no adjdjbsd task',
-   time: '45:60',
-   status: 'pending'
- },
- {
-   title: 'its vajdsdfntask',
-   time: '50:60',
-   status: 'done'
- }]
-
+ 
 const useStyles = makeStyles(theme => ({
   mainBox: {
     marginTop: '60px',
