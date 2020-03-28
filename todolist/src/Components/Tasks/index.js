@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Tab, Tabs, AppBar, makeStyles, useTheme, List, ListItem } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import PropTypes from 'prop-types';
+import Modal from '../modal/index';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,114 +11,41 @@ const useStyles = makeStyles(theme => ({
   },
   taskTitle: {
     textAlign: 'left',
-    color: 'blue',
     width: '100%'
   },
   taskTime: {
     textAlign: 'right',
   },
   task: {
-    height: '2em',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderBottom:'2px solid black'
   }
 }))
 
 const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-
+  const { children, value, index, tasks,list, ...other } = props;
   const classes = useStyles();
+  console.log('tasksPane',list)
 
-  let tasks = [{
-    title: 'Its a task',
-    time: 10,
-    description: 'Its a real task and i done'
-  },
-  {
-    title: 'its no a task',
-    time: 20,
-    description: 'I dont know'
-  },
-  {
-    title: 'React boys',
-    time: 90,
-    description: 'reacting...'
-  },
-  {
-    title: 'its nk',
-    time: 240,
-    description: 'I ow'
-  },  {
-    title: 'task',
-    time: 240,
-    description: 'Iow'
-  },  {
-    title: 'itsk',
-    time: 320,
-    description: 'I dont know'
-  },  {
-    title: 'task',
-    time: 210,
-    description: 'I know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  },
-  {
-    title: 'its no a task',
-    time: 560,
-    description: 'I dont know'
-  }]
-
+  
   return (
     <Typography component="div" role="tabpanel" id={`full-width-tab-panel-${index}`} aria-labelledby={`full-width-tab-${index}`}
       {...other} >
 
-      <List>
-        {tasks.map((task, index) => {
-          console.log(task.title)
-          return(
-          <ListItem>
-            <p className={classes.taskTitle}>{task.title}</p>
-            <span className={classes.taskTime}>{task.time}</span>
-          </ListItem>)
-        })}
+      <List  >
+        {console.log(`value ${value} - index ${index} - children ${children}`)}
+        {tasks.map((myTasks) => {
+          if((index == 0 && children == "ToDo" && myTasks.status == "pending") || (index == 1 && children == "Done" && myTasks.status == "done")){
+            return(
+              <ListItem className={classes.task} key={myTasks}>
+                <p className={classes.taskTitle}>{myTasks.title}</p>
+                <Modal task={myTasks} ></Modal>
+                
+                <span className={classes.taskTime}>{myTasks.time}</span>
+              </ListItem>)
+          }
+
+        })} 
 
 
       </List>
@@ -139,10 +67,10 @@ function a11yProps(index) {
 }
 
 
-const Tasks = () => {
+const Tasks = ({tasks}) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -162,8 +90,8 @@ const Tasks = () => {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="To Do" {...a11yProps(0)} />
-          <Tab label="Done" {...a11yProps(1)} />
+          <Tab list="todo" label="To Do" {...a11yProps(0)} />
+          <Tab list="done" label="Done" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -171,10 +99,10 @@ const Tasks = () => {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
+        <TabPanel tasks={tasks} value={value} index={0} dir={theme.direction}>
           ToDo
           </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel tasks={tasks} value={value} index={1} dir={theme.direction}>
           Done
           </TabPanel>
       </SwipeableViews>
