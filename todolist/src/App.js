@@ -7,6 +7,7 @@ import CreateTask from './Components/createTask/index';
 import 'typeface-roboto';
 
 
+
 let tasks = [{
   title: 'Its a task',
   time: '00:10',
@@ -26,15 +27,15 @@ let tasks = [{
   title: 'its nk',
   time: '24:00',
   status: 'done'
-},  {
+}, {
   title: 'task',
   time: '20:40',
   status: 'done'
-},  {
+}, {
   title: 'itsk',
   time: '03:20',
   status: 'pending'
-},  {
+}, {
   title: 'task',
   time: '21:40',
   status: 'pending'
@@ -61,12 +62,12 @@ let tasks = [{
 }]
 
 
-const useStyles = makeStyles( theme =>({
+const useStyles = makeStyles(theme => ({
   mainBox: {
     marginTop: '60px',
     border: '2px solid black',
     height: '40em',
-    borderRadius:'6px',
+    borderRadius: '6px',
     backgroundColor: '#F5F0F0',
     width: '100%',
     padding: 0,
@@ -74,23 +75,23 @@ const useStyles = makeStyles( theme =>({
   },
   title: {
     textAlign: 'center',
-    borderRadius:'6px',
+    borderRadius: '6px',
   },
   container: {
     width: '100%',
-    borderRadius:'6px',
+    borderRadius: '6px',
     backgroundColor: '#F5F0F0',
     border: '2px solid black',
     marginTop: '40px',
     height: '5em'
   },
-  addButton:{
-    position:'absolute',
+  addButton: {
+    position: 'absolute',
     margin: theme.spacing(1),
     right: '20%',
-    top:'75%',
+    top: '75%',
   },
-  footer:{
+  footer: {
     textAlign: 'left',
     marginTop: '10px'
   }
@@ -110,8 +111,9 @@ function App() {
   const classes = useStyles();
 
 
+
   return (
-    
+
     <ThemeProvider theme={theme}>
       <Typography variant="h1" component="h2" className={classes.title} >
         <FontAwesomeIcon icon={faTasks} /> To Do List
@@ -121,8 +123,8 @@ function App() {
         <Fab variant="round" aria-label="add" color="secondary" className={classes.addButton}><CreateTask></CreateTask></Fab>
       </Container>
       <Container className={classes.container} >
-      <Typography variant="h3" component="h2" className={classes.footer} >
-        <FontAwesomeIcon icon={faClock} /> Tempo gasto: 10:00
+        <Typography variant="h3" component="h2" className={classes.footer} >
+          <FontAwesomeIcon icon={faClock} /> Tempo gasto: 10:00
       </Typography>
       </Container>
     </ThemeProvider>

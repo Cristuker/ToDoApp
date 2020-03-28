@@ -34,7 +34,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const MyModal = ({task}) => {
-    console.log(task)
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
@@ -63,10 +62,11 @@ const MyModal = ({task}) => {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
+                        {/* {edit} */}
                         <Container>
                         <h3 className={classes.title} >{task.title} <span>{task.time}</span></h3>
                         </Container>
-                        <p className={classes.description} >{task.description}</p>
+                        <p className={classes.status} >{task.status}</p>
                     </div>
                 </Fade>
             </Modal>
