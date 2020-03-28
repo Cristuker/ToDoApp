@@ -3,7 +3,7 @@ import { Container, createMuiTheme, ThemeProvider, Typography, makeStyles, Fab }
 import { Add } from '@material-ui/icons';
 import { faTasks, faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Navbar from './Components/navbar/index';
+import Navbar from './Components/Tasks/index';
 import 'typeface-roboto'
 
 
@@ -14,7 +14,8 @@ const useStyles = makeStyles( theme =>({
     height: '40em',
     backgroundColor: '#F5F0F0',
     width: '100%',
-    padding: 0
+    padding: 0,
+    overflow: 'auto'
   },
   title: {
     textAlign: 'center',
@@ -24,14 +25,13 @@ const useStyles = makeStyles( theme =>({
     backgroundColor: '#F5F0F0',
     border: '1px solid black',
     marginTop: '40px',
-    height: '5em',
+    height: '5em'
   },
-  icon:{
+  addButton:{
     position:'relative',
-    float:'right',
     margin: theme.spacing(1),
     marginRight: '1em',
-    top:'70%'
+    top:'75%',
   },
   footer:{
     textAlign: 'left',
@@ -60,7 +60,7 @@ function App() {
       </Typography>
       <Container className={classes.mainBox}>
         <Navbar className={classes.navbar} ></Navbar>
-        <Fab variant="round" aria-label="add" color="secondary" className={classes.icon}><Add/></Fab>
+        <Fab variant="round" aria-label="add" color="secondary" className={classes.addButton}><Add/></Fab>
       </Container>
       <Container className={classes.container} >
       <Typography variant="h3" component="h2" className={classes.footer} >
