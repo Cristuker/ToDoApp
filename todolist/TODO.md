@@ -6,4 +6,6 @@
 [x] - Listar tarefas feitas
 [x] - Reabrir tarefa
 [ ] - Editar tarefa
+[ ] - Pausar tarefa
+[ ] - Concluir tarefa
 [ ] - Tempo total trabalhado
