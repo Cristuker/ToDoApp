@@ -2,6 +2,7 @@ import React,{ useEffect, useState } from 'react';
 import { ListItem, makeStyles } from '@material-ui/core';
 import { showTodos } from '../../services/pouhdb';
 import Modal from '../../Components/modal/index';
+import StartButton from '../../Components/ButtonStart/index';
 
 const useStyles = makeStyles({
   taskTitle: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
 
 
 
-export default function Todo() {
+const Todo = () => {
 
   const [tasks, setTasks ] = useState([]);
 
@@ -47,6 +48,7 @@ export default function Todo() {
         return (
           <ListItem className={classes.task} key={myTasks}>
             <p className={classes.taskTitle}>{myTasks.title}</p>
+            <StartButton myTasks={myTasks} />
             <Modal task={myTasks} ></Modal>
           </ListItem>)
       }
@@ -55,7 +57,4 @@ export default function Todo() {
   )
 }
 
-
-
-
-
+export default Todo;

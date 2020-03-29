@@ -30,7 +30,7 @@ const Alert = (props) => {
 }
 
 
-export default function Done() {
+const Done = () => {
 
   const [tasks, setTasks] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -90,7 +90,4 @@ export default function Done() {
   )
 }
 
-
-
-
-
+export default Done;
