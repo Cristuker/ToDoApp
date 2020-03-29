@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, makeStyles,BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Container, makeStyles, Tab, Tabs, Paper } from '@material-ui/core';
 import ListIcon from '@material-ui/icons/List';
 import DoneIcon from '@material-ui/icons/Done';
 
@@ -9,7 +9,7 @@ import DoneIcon from '@material-ui/icons/Done';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    right:0,
+    right: 0,
     marginRight: 0,
     marginLeft: 0
   },
@@ -31,18 +31,25 @@ const useStyles = makeStyles(theme => ({
 const Tasks = () => {
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  return(
-  <Container>
-    <BottomNavigation      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}showLabels className={classes.root}>
-      <BottomNavigationAction href="/" label="To Do" icon={<ListIcon />} />
-      <BottomNavigationAction href="/done" label="Done" icon={<DoneIcon />} />
-    </BottomNavigation>
-  </Container>
-  )
+  const [value, setValue] = useState(2);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+      <Paper square>
+        <Tabs
+          value={value}
+          indicatorColor="secondary"
+          textColor="secondary"
+          centered
+          onChange={handleChange}>
+          <Tab label="To Do" href="/" icon={<ListIcon />} />
+          <Tab label="Done" href="/done" icon={<DoneIcon />} />
+        </Tabs>
+      </Paper>
+  );
 }
 
 export default Tasks;

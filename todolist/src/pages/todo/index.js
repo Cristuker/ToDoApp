@@ -1,41 +1,62 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
+import { ListItem, makeStyles } from '@material-ui/core';
 import { showTodos } from '../../services/pouhdb';
+import Modal from '../../Components/modal/index';
 
-// import { Container } from './styles';
+const useStyles = makeStyles({
+  taskTitle: {
+    textAlign: 'left',
+    width: '100%'
+  },
+  taskTime: {
+    textAlign: 'right',
+  },
+  task: {
+    alignItems: 'center',
+    borderBottom: '2px solid black'
+  }
+})
 
-export default function todo() {
-  return (
-    <div>
-        todo
-    </div>
-  );
+
+
+export default function Todo() {
+
+  const [tasks, setTasks ] = useState([]);
+
+  const classes = useStyles();
+
+  const getData = async () => {
+    const { rows } = await showTodos();
+    Promise.resolve(rows)
+      .then((value) => {
+        console.log('value', value)
+        setTasks(value.map((task) => {
+          return task.doc
+        }))
+      }, (error) => {
+        throw error
+      })
+  }
+  useEffect(() => {
+    getData();
+  }, [])
+
+
+  return (<>
+    {tasks.map((myTasks, i) => {
+      if (myTasks.status === "pending"){
+        return (
+          <ListItem className={classes.task} key={myTasks}>
+            <p className={classes.taskTitle}>{myTasks.title}</p>
+            <Modal task={myTasks} ></Modal>
+          </ListItem>)
+      }
+    })}
+  </>
+  )
 }
 
-// {tasks.map((myTasks, i) => {
-//     if ((index === 0 && children === "ToDo" && myTasks.status === "pending") || (index === 1 && children === "Done" && myTasks.status === "done")) {
-//       return (
-//         <ListItem className={classes.task} key={myTasks}>
-//           <p className={classes.taskTitle}>{myTasks.title}</p>
-//           <Modal task={myTasks} ></Modal>
-//           <span className={classes.taskTime}>{myTasks.time}</span>
-//         </ListItem>)
-//     }
-//   })}
 
-// const getData = async () => {
-//     const { rows } = await showTodos();
 
-//     Promise.resolve(rows)
-//       .then((value) => {
-//         console.log('value', value)
-//         setTasks(value.map((task) => {
-//           return task.doc
-//         }))
-//       }, (error) => {
-//         throw error
-//       })
 
-//   }
-//   useEffect(() => {
-//     getData();
-//   }, [])
+

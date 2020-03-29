@@ -65,9 +65,8 @@ function App() {
       <Container className={classes.mainBox}>
         <Tasks className={classes.navbar} ></Tasks>
         <Fab variant="round" aria-label="add" color="secondary" className={classes.addButton}><CreateTask></CreateTask></Fab>
+        <Routes />
       </Container>
-
-    <Routes />
       <Container className={classes.container} >
         <Typography variant="h3" component="h2" className={classes.footer} >
           <FontAwesomeIcon icon={faClock} /> Tempo gasto: 10:00
