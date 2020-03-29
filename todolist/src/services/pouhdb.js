@@ -1,6 +1,9 @@
 import PouchDB from 'pouchdb-browser';
 
-const todoDB = new PouchDB('todo_db');
+const todoDB = new PouchDB('todo_db',[{
+    auto_compaction: false
+
+}]);
 
 const showTodos = async () => {
     let data;
@@ -39,8 +42,13 @@ const updateTask = (task) =>{
     if(task.status === 'done'){
         task.status = 'pending'
     }
+    console.log(task)
+     todoDB.put(task,(err,result) =>{
 
-    todoDB.put(task)
+        if(err) throw err;
+    
+        console.log('Task updated',result)
+    })
 
 
 }

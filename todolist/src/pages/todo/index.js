@@ -44,10 +44,11 @@ const Todo = () => {
 
   return (<>
     {tasks.map((myTasks, i) => {
-      if (myTasks.status === "pending"){
+      if (myTasks.status === "pending" || myTasks.status === 'doing'){
         return (
           <ListItem className={classes.task} key={myTasks}>
             <p className={classes.taskTitle}>{myTasks.title}</p>
+            <span>{myTasks.status === 'doing' ? 'In progress...':'' }</span>
             <StartButton myTasks={myTasks} />
             <Modal task={myTasks} ></Modal>
           </ListItem>)
