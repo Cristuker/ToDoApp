@@ -46,9 +46,6 @@ const useStyles = makeStyles(theme => ({
     create: {
         marginRight: '10px',
     },
-    cancel: {
-        backgroundColor: 'red'
-    },
     input: {
         marginBottom: '30px'
     },

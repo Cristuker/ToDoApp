@@ -31,9 +31,9 @@ const useStyles = makeStyles(theme => ({
     height: '5em'
   },
   addButton: {
-    position: 'fixed',
+    position: 'absolute',
     margin: theme.spacing(1),
-    right: '3%',
+    left: '90%',
     top: '15%',
   },
   footer: {
@@ -64,7 +64,9 @@ function App() {
       </Typography>
       <Container className={classes.mainBox}>
         <Tasks className={classes.navbar} ></Tasks>
-        <Fab variant="round" aria-label="add" color="secondary" className={classes.addButton}><CreateTask></CreateTask></Fab>
+        <Container className={classes.addButton} >
+        <Fab variant="round" aria-label="add" color="secondary" ><CreateTask></CreateTask></Fab>
+        </Container>
         <Routes />
       </Container>
       <Container className={classes.container} >

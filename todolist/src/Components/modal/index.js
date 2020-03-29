@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Modal, Fade, Backdrop, makeStyles, Container } from '@material-ui/core';
+import { Modal, Fade, Backdrop, makeStyles, Container, TextField, Button, Snackbar } from '@material-ui/core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import MuiAlert from '@material-ui/lab/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { updateTask } from '../../services/pouhdb';
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -20,22 +22,49 @@ const useStyles = makeStyles(theme => ({
         marginRight: '10px',
         cursor: 'pointer'
     },
-    title:{
-        float:'left'
+    title: {
+        float: 'left',
+        fontFamily: "'Noto Sans JP', sans-serif",
+        marginLeft: '-21px'
     },
-    time:{
-        float:'right'
+    time: {
+        float: 'right'
     },
-    description:{
-        marginTop:'5em',
-        textJustify:'auto'
+    description: {
+        marginTop: '5em',
+        textJustify: 'auto'
+    },
+    warning: {
+        top: '30em'
+    },
+    create: {
+        marginRight: '10px',
+    },
+    status: {
+        marginLeft:'20px',
+        color:'red'
     }
-    
+
 }))
 
-const MyModal = ({task}) => {
+const Alert = (props) => {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const MyModal = ({ task }) => {
+
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const [title, setTitle] = useState('');
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+
+    const handleOpenSnackbar = () => {
+        setOpenSnackbar(true);
+    };
+
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
+    };
 
     const handleOpen = () => {
         setOpen(true);
@@ -44,6 +73,18 @@ const MyModal = ({task}) => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleUpdate = async () => {
+
+        if (title === '')
+            return handleOpenSnackbar()
+
+        task.title = title
+        await updateTask(task)
+        setTimeout(() => {
+            handleClose();
+        }, 500)
+    }
 
     return (
         <div>
@@ -61,14 +102,20 @@ const MyModal = ({task}) => {
                 }}>
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        {/* {edit} */}
                         <Container>
-                        <h3 className={classes.title} >{task.title} <span>{task.time}</span></h3>
+                            <h3 className={classes.title} >Editar tarefa <span className={classes.status} >{task.status}</span></h3>
                         </Container>
-                        <p className={classes.status} >{task.status}</p>
+                        <TextField thisTaskvalue={title} onChange={e => setTitle(e.target.value)} className={classes.input} label="Titutlo da tarefa" size="small"></TextField><br /><br />
+                        <Button onClick={handleUpdate} variant="contained" color="primary" className={classes.create}>Atualizar</Button>
+                        <Button onClick={handleClose} variant="contained" color="secondary">Cancelar</Button>
                     </div>
                 </Fade>
             </Modal>
+            <Snackbar className={classes.warning} key={`bottom,center`} open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                <Alert onClose={handleCloseSnackbar} severity="error">
+                    Adicione um titulo
+                </Alert>
+            </Snackbar>
         </div>)
 
 }
