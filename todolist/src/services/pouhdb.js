@@ -1,30 +1,51 @@
 import PouchDB from 'pouchdb-browser';
+
 const todoDB = new PouchDB('todo_db');
 
-    const postTask = (task) =>{
+const showTodos = async () => {
+    let data;
 
-        let taskToBeSaved = {
-            _id: new Date().toISOString(),
-            title: task.title,
-            status: task.status,
-        }
-    
-        todoDB.put(taskToBeSaved, (err, result)=>{
-            
-            if(err) throw err;
-            
-            console.log('Task saved!',result)
-        })
+    await todoDB.allDocs({ include_docs: true, descending: true }, (err, doc) => {
+        data = doc
+    })
+    return data;
+}
+
+
+todoDB.changes({
+    since: 'now',
+    live: true
+}).on('change', showTodos);
+
+const postTask = (task) => {
+    console.log(task)
+    let taskToBeSaved = {
+        _id: new Date().toISOString(),
+        title: task.title,
+        status: task.status,
+        time: 0
     }
 
-    const showTodos = async () =>{
-        let data;
+    todoDB.post(taskToBeSaved, (err, result) => {
 
-        await todoDB.allDocs({ include_docs: true, descending: true},(err,doc) =>{
-            data = doc
-        })
-        return data;
+        if (err) throw err;
+
+        console.log('Task saved!', result)
+    })
+}
+
+const updateTask = (task) =>{
+
+    if(task.status === 'done'){
+        task.status = 'pending'
     }
 
+    todoDB.put(task)
 
-export { postTask, showTodos };
+
+}
+
+
+
+
+export { postTask, showTodos, updateTask };

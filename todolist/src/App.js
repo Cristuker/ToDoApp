@@ -31,10 +31,10 @@ const useStyles = makeStyles(theme => ({
     height: '5em'
   },
   addButton: {
-    position: 'absolute',
+    position: 'fixed',
     margin: theme.spacing(1),
-    right: '20%',
-    top: '75%',
+    right: '3%',
+    top: '15%',
   },
   footer: {
     textAlign: 'left',

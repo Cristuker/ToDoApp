@@ -85,16 +85,15 @@ const MyModal = () => {
     };
 
 
-    function handleSave() {
+    const handleSave = async () => {
 
         if (title === '')
             return handleOpenSnackbar()
 
         let task = {}
         task.title = title
-        task.status  = 'pending'
-        console.log('taskabsda',task)
-        postTask(JSON.stringify(task))
+        task.status  = 'done'
+        await postTask(task)
         setTimeout(() => {
             handleClose();
         }, 500)
