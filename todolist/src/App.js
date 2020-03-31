@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Container, createMuiTheme, ThemeProvider, Typography, makeStyles, Fab } from '@material-ui/core';
 import { faTasks, faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -64,22 +64,8 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [time, setTime] = useState();
 
-  const getData = async () => {
-
-    const { rows } = await showTodos();
-    Promise.resolve(rows)
-      .then((value) => {
-        let data = value.map((task) => {
-          return task.doc
-        })
-        setTasks(data)
-      }, (error) => {
-        throw error
-      })
-  }
-
   const TimeOnWork = async () => {
-
+    console.log('ada',tasks)
     const ArrayWhitAllTimes = tasks.map(task => {
       return task.status === 'done' && !isNaN(task.allTime) ? task.allTime : 0
     })
@@ -94,13 +80,26 @@ function App() {
     setTime(allTimeWaisting);
   }
 
+  const getData = async () => {
+
+    const { rows } = await showTodos();
+    Promise.resolve(rows)
+      .then((value) => {
+        let data = value.map((task) => {
+          return task.doc
+        })
+        console.log('data',data)
+        setTasks(data)
+        
+      }, (error) => {
+        throw error
+      })
+  }
 
   useEffect(() => {
     getData();
     TimeOnWork();
   }, [])
-
-  console.log(time)
 
   const classes = useStyles();
 
