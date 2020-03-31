@@ -87,10 +87,10 @@ const MyModal = () => {
         if (title === '')
             return handleOpenSnackbar()
 
-        let task = {}
-        task.title = title
-        task.status  = 'done'
-        await postTask(task)
+        let task = {};
+        task.title = title;
+        task.status  = 'pending';
+        await postTask(task);
         setTimeout(() => {
             handleClose();
         }, 500)
@@ -114,7 +114,7 @@ const MyModal = () => {
                     <div className={classes.paper}>
                         <form onSubmit={handleSave} >
                             <h3 className={classes.title} >Criar tarefa</h3><br />
-                            <TextField value={title} onChange={e => setTitle(e.target.value)} className={classes.input} label="Titutlo da tarefa" size="small" ></TextField><br />
+                            <TextField autoFocus value={title} onChange={e => setTitle(e.target.value)} className={classes.input} label="Titutlo da tarefa" size="small" ></TextField><br />
                             <Button onClick={handleSave} variant="contained" color="primary" className={classes.create}>Criar</Button>
                             <Button onClick={handleClose} variant="contained" color="secondary">Cancelar</Button>
                         </form>

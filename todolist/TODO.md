@@ -1,11 +1,11 @@
 [x] - Criar layout
 [x] - Criar uma tarefa
-[ ] - Iniciar uma tarefa com o cronometro
-[ ] - Terminar uma tarefa com o cronometro e mostrar o tempo gasto nela
+[x] - Iniciar uma tarefa com o cronometro
+[x] - Terminar uma tarefa com o cronometro e mostrar o tempo gasto nela
 [x] - Listar tarefas pendentes
 [x] - Listar tarefas feitas
 [x] - Reabrir tarefa
-[ ] - Editar tarefa
-[ ] - Pausar tarefa
-[ ] - Concluir tarefa
+[x] - Editar tarefa
+[x] - Pausar tarefa
+[x] - Concluir tarefa
 [ ] - Tempo total trabalhado

@@ -14,19 +14,12 @@ const showTodos = async () => {
     return data;
 }
 
-
-todoDB.changes({
-    since: 'now',
-    live: true
-}).on('change', showTodos);
-
 const postTask = (task) => {
-    console.log(task)
+    
     let taskToBeSaved = {
         _id: new Date().toISOString(),
         title: task.title,
-        status: task.status,
-        time: 0
+        status: task.status
     }
 
     todoDB.post(taskToBeSaved, (err, result) => {
@@ -39,11 +32,7 @@ const postTask = (task) => {
 
 const updateTask = (task) =>{
 
-    if(task.status === 'done'){
-        task.status = 'pending'
-    }
-    console.log(task)
-     todoDB.put(task,(err,result) =>{
+    todoDB.put(task,(err,result) =>{
 
         if(err) throw err;
     

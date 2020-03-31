@@ -41,7 +41,6 @@ const Done = () => {
     const { rows } = await showTodos();
     Promise.resolve(rows)
       .then((value) => {
-        console.log('value', value)
         setTasks(value.map((task) => {
           return task.doc
         }))

@@ -16,10 +16,9 @@ const StartButton = (props) => {
     const classes = useStyles();
 
     const { myTasks } = props;
-    console.log(myTasks)
     const handleStart = () => {
         myTasks.status = 'doing'
-        myTasks.time = JSON.stringify(Moment(new Date()))
+        myTasks.startTime = JSON.stringify(Moment(new Date()))
         updateTask(myTasks);
     }
 
