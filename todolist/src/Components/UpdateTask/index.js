@@ -72,6 +72,7 @@ const MyModal = ({ task }) => {
 
     const handleClose = () => {
         setOpen(false);
+        
     };
 
     const handleUpdate = async () => {
@@ -83,7 +84,9 @@ const MyModal = ({ task }) => {
         await updateTask(task)
         setTimeout(() => {
             handleClose();
+            document.location.reload(true);
         }, 500)
+        
     }
 
     return (

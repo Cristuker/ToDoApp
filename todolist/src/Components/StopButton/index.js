@@ -24,6 +24,7 @@ const StopButton = (props) => {
         const duration = moment.duration(now.diff(past));
         myTasks.allTime = duration.asHours();
         updateTask(myTasks);
+        document.location.reload(true);
     }
 
     return (

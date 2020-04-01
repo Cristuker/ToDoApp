@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Fade, Backdrop, makeStyles, Container, Button, TextField,Snackbar } from '@material-ui/core';
+import { Modal, Fade, Backdrop, makeStyles, Container, Button, TextField, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Add } from '@material-ui/icons';
 import { postTask } from '../../services/pouhdb';
@@ -40,8 +40,8 @@ const useStyles = makeStyles(theme => ({
     addButton: {
         position: 'absolute',
         margin: theme.spacing(1),
-        right: '15%',
-        top: '15%',
+        right: '10%',
+        top: '10%',
     },
     create: {
         marginRight: '10px',
@@ -59,33 +59,34 @@ const useStyles = makeStyles(theme => ({
 const MyModal = () => {
 
     const classes = useStyles();
-    const [openSnackbar, setOpenSnackbar] = useState(false);
-    const [open, setOpen] = useState(false);
+    const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
+    const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+    const [open, setOpen] = useState()
     const [title, setTitle] = useState('');
 
-    const handleOpenSnackbar = () => {
-        setOpenSnackbar(true);
+    const handleOpenErrorSnackbar = () => {
+        setOpenErrorSnackbar(true);
     };
 
-    const handleCloseSnackbar = () => {
-        setOpenSnackbar(false);
+    const handleSuccessOpen = () => {
+        setOpenSuccessSnackbar(true);
     };
 
+    const handleClose = () => {
+        setTitle('');
+        setOpenSuccessSnackbar(false);
+        setOpenErrorSnackbar(false);
+        document.location.reload(true);
+    };
 
     const handleOpen = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
-        setTitle('');
-        setOpen(false);
-    };
-
-
     const handleSave = async () => {
 
         if (title === '')
-            return handleOpenSnackbar()
+            return handleOpenErrorSnackbar()
 
         let task = {};
         task.title = title;
@@ -93,6 +94,7 @@ const MyModal = () => {
         await postTask(task);
         setTimeout(() => {
             handleClose();
+            handleSuccessOpen();
         }, 500)
     }
 
@@ -121,9 +123,14 @@ const MyModal = () => {
                     </div>
                 </Fade>
             </Modal>
-            <Snackbar className={classes.warning} key={`bottom,center`} open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                <Alert onClose={handleCloseSnackbar} severity="error">
+            <Snackbar className={classes.warning} key={`bottom,center`} open={openErrorSnackbar} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
                     Adicione um titulo
+                </Alert>
+            </Snackbar>
+            <Snackbar  key={`bottom,center`} open={openSuccessSnackbar} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleSuccessOpen} severity="success">
+                  Tarefa criada com sucesso!
                 </Alert>
             </Snackbar>
         </Container>)

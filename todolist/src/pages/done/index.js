@@ -65,8 +65,8 @@ const Done = () => {
     setOpenSnackbar(false);
   };
 
-  return (<>
-    {tasks.map((myTasks, i) => {
+  return (<> 
+    {tasks.map((myTasks, i) => {// eslint-disable-line no-console
       if (myTasks.status === "done") {
         return (
           <Box>
@@ -76,9 +76,9 @@ const Done = () => {
                 <FontAwesomeIcon icon={faRedoAlt} />
               </Container>
             </ListItem>
-            <Snackbar className={classes.warning} key={`bottom,center`} open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+            <Snackbar  key={`bottom,center`} open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                 <Alert onClose={handleCloseSnackbar} severity="success">
-                  Tarefa aberta com sucesso!
+                  Tarefa reaberta com sucesso!
                 </Alert>
             </Snackbar>
           </Box>

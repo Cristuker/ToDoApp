@@ -8,4 +8,5 @@
 [x] - Editar tarefa
 [x] - Pausar tarefa
 [x] - Concluir tarefa
-[ ] - Tempo total trabalhado
+[x] - Tempo total trabalhado
+

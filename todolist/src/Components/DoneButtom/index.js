@@ -24,10 +24,12 @@ const DoneButton = (props) => {
         const duration = moment.duration(now.diff(past));
         myTasks.allTime = duration.asHours();
         updateTask(myTasks);
+        document.location.reload(true);
     }
 
+
     return (
-        <div className={classes.root} onClick={ handleDone } > 
+        <div className={classes.root} onClick={handleDone} >
             <CheckCircleIcon />
         </div>
     )

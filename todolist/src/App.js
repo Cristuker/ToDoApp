@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { Container, createMuiTheme, ThemeProvider, Typography, makeStyles, Fab } from '@material-ui/core';
-import { faTasks, faClock } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tasks from './Components/Navbar/index';
 import CreateTask from './Components/createTask/index';
 import Routes from './routes';
+import WorkTime from './Components/WorkTime/index';
 import 'typeface-roboto';
-import { showTodos } from './services/pouhdb';
 
 const useStyles = makeStyles(theme => ({
+  root:{
+    width: '50%'
+  },
   mainBox: {
     marginTop: '60px',
     border: '2px solid black',
@@ -17,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#F5F0F0',
     width: '100%',
     padding: 0,
-    overflow: 'auto'
+    overflow: 'auto',
   },
   title: {
     textAlign: 'center',
@@ -34,12 +35,9 @@ const useStyles = makeStyles(theme => ({
   addButton: {
     position: 'absolute',
     margin: theme.spacing(1),
-    left: '90%',
-    top: '15%',
-  },
-  footer: {
-    textAlign: 'left',
-    marginTop: '10px'
+    textAlignLast:'right',
+    paddingRight: '24rem',
+    top: '7rem'
   }
 }))
 
@@ -52,75 +50,29 @@ const theme = createMuiTheme({
   }
 })
 
-
-
-
-
-
-
-
 function App() {
 
-  const [tasks, setTasks] = useState([]);
-  const [time, setTime] = useState();
 
-  const TimeOnWork = async () => {
-    console.log('ada',tasks)
-    const ArrayWhitAllTimes = tasks.map(task => {
-      return task.status === 'done' && !isNaN(task.allTime) ? task.allTime : 0
-    })
-    console.log('all', ArrayWhitAllTimes)
-
-    if (ArrayWhitAllTimes.length === 0) return 0
-
-    const allTimeWaisting = ArrayWhitAllTimes.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue
-    })
-    console.log('asd', allTimeWaisting)
-    setTime(allTimeWaisting);
-  }
-
-  const getData = async () => {
-
-    const { rows } = await showTodos();
-    Promise.resolve(rows)
-      .then((value) => {
-        let data = value.map((task) => {
-          return task.doc
-        })
-        console.log('data',data)
-        setTasks(data)
-        
-      }, (error) => {
-        throw error
-      })
-  }
-
-  useEffect(() => {
-    getData();
-    TimeOnWork();
-  }, [])
 
   const classes = useStyles();
 
-  return (
+  return (<Container className={classes.root}>
     <ThemeProvider theme={theme}>
       <Typography variant="h1" component="h2" className={classes.title} >
-        <FontAwesomeIcon icon={faTasks} /> TO DO LIST
+         <span role="img" aria-label="book of tasks"> 📝</span> TO DO LIST
       </Typography>
       <Container className={classes.mainBox}>
         <Tasks className={classes.navbar} ></Tasks>
-        <Container className={classes.addButton} >
-          <Fab variant="round" aria-label="add" color="secondary" ><CreateTask></CreateTask></Fab>
-        </Container>
         <Routes />
       </Container>
+      <Container className={classes.addButton} >
+        <Fab variant="round" size="medium" color="secondary" ><CreateTask></CreateTask></Fab>
+      </Container>
       <Container className={classes.container} >
-        <Typography variant="h3" component="h2" className={classes.footer} >
-          <FontAwesomeIcon icon={faClock} /> Tempo gasto: {time}
-        </Typography>
+        <WorkTime />
       </Container>
     </ThemeProvider>
+    </Container>
   );
 }
 

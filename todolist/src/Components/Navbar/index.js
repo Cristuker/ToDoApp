@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tab, Tabs, Paper } from '@material-ui/core';
 import ListIcon from '@material-ui/icons/List';
 import DoneIcon from '@material-ui/icons/Done';
 
 
-const Tasks = () => {
-
+const Tasks = (props) => {
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+
+  useEffect(()=>{
+    window.location.pathname === '/done' ? setValue(1) : setValue(0)
+  },[])
+  
 
   return (
       <Paper square>
@@ -18,8 +19,7 @@ const Tasks = () => {
           value={value}
           indicatorColor="secondary"
           textColor="secondary"
-          centered
-          onChange={handleChange}>
+          centered >
           <Tab label="To Do" href="/" icon={<ListIcon />} />
           <Tab label="Done" href="/done" icon={<DoneIcon />} />
         </Tabs>
