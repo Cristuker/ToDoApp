@@ -14,7 +14,6 @@
     "@testing-library/user-event": "^7.1.2",
     "moment": "^2.24.0",
     "pouchdb-browser": "^7.2.1",
-    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-compound-timer": "^1.2.0",
     "react-countdown": "^2.2.1",
