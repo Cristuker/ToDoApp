@@ -20,7 +20,7 @@ const StartButton = (props) => {
     myTasks.status = 'doing';
     myTasks.startTime = JSON.stringify(Moment(new Date()));
     updateTask(myTasks);
-    // document.location.reload(true);
+    document.location.reload(true);
   };
 
   return (

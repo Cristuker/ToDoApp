@@ -4,8 +4,9 @@ import { ListItem, makeStyles, Container, Typography, createMuiTheme } from '@ma
 import { showTodos } from '../../services/pouhdb';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Modal from '../../Components/UpdateTask/index';
-
-import Timer from '../../Components/Timer/index';
+import StartButton from '../../Components/StartButton/index';
+import StopButton from '../../Components/StopButton/index';
+import DoneButton from '../../Components/DoneButtom/index';
 import 'typeface-roboto';
 
 const useStyles = makeStyles({
@@ -42,7 +43,12 @@ const Todo = () => {
     Promise.resolve(rows)
       .then((value) => {
         const data = value.map((task) => {
-          return task.doc
+          if(task.doc.status === 'doing' || task.doc.status === 'pending'){
+            return task.doc
+          }else{
+            ''
+          } 
+          
         })
         setTasks(data)
       }, (error) => {
@@ -52,15 +58,18 @@ const Todo = () => {
   useEffect(() => {
     getData();
   }, [])
+  
   if (tasks.length) {
     return (<>
       {tasks.map((myTasks, i) => {
+        console.log('tas',tasks)
         if (myTasks.status === "pending" || myTasks.status === 'doing') {
           return (
             <ListItem className={classes.task} key={myTasks}>
               <p className={classes.taskTitle}>{myTasks.title}</p>
               <span>{myTasks.status === 'doing' ? 'In progress...' : ''}</span>
-              <Timer myTasks={myTasks} />
+              <DoneButton myTasks={myTasks} />
+                {myTasks.status === 'doing' ? <StopButton myTasks={myTasks} /> : <StartButton myTasks={myTasks} />}
               <Modal task={myTasks} ></Modal>
             </ListItem>)
         }

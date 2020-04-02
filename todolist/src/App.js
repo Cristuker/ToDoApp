@@ -71,7 +71,7 @@ const App = () => {
   return (
     <Container className={classes.root}>
       <ThemeProvider theme={theme}>
-        <Container display="flex" flexDirection="column" flexWrap="wrap">
+        <Container >
           <Container className={classes.containerTitle}>
             <Typography variant="h1" component="h2" className={classes.title}>
               <span role="img" aria-label="book of tasks">

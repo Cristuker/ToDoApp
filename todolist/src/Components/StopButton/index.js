@@ -15,16 +15,16 @@ const useStyles = makeStyles({
 const StopButton = (props) => {
   const classes = useStyles();
 
-  const { myTasks, getTime } = props;
+  const { myTasks } = props;
 
   const handlePause = () => {
     myTasks.status = 'pending';
-    myTasks.lastTime = getTime();
     const now = moment(new Date());
     const past = moment(JSON.parse(myTasks.startTime));
     const duration = moment.duration(now.diff(past));
     myTasks.allTime = duration.asHours();
     updateTask(myTasks);
+    document.location.reload(true);
   };
 
   return (

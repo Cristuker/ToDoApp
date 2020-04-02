@@ -12,6 +12,7 @@ const useStyles = makeStyles({
 });
 
 const DoneButton = (props) => {
+
   const classes = useStyles();
 
   const { myTasks } = props;
