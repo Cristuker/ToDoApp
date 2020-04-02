@@ -4,7 +4,8 @@ module.exports = {
         "es6": true
     },
     "extends": [
-        "eslint:recommended",
+        "airbnb-base",
+        "prettier",
         "plugin:react/recommended"
     ],
     "globals": {
@@ -20,11 +21,17 @@ module.exports = {
     },
     "plugins": [
         "react",
-        "react-hooks"
+        "react-hooks",
+        "prettier"
     ],
     "rules": {
+        "prettier/prettier":"error",
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "class-methods-use-this":"off",
+        "no-param-reassign":"off",
+        "camelcase":"off",
+        "no-unused-vars":["error",{ "argsIgnorePattern":"next"}]
     },
 
 };

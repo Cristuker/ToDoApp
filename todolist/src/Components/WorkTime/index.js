@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 import { showTodos } from '../../services/pouhdb';
@@ -10,8 +11,6 @@ const useStyles = makeStyles({
         marginTop: '10px'
     }
 })
-
-
 
 
 const WorkTime = () => {
@@ -29,7 +28,7 @@ const WorkTime = () => {
         const allTimeWaisting = ArrayWhitAllTimes.reduce((accumulator, currentValue) => {
             return accumulator + currentValue;
         })
-        setTime(String(allTimeWaisting.toFixed(2)).replace('.',':'))
+        setTime(String(allTimeWaisting.toFixed(2)).replace('.',':'));
     }
 
     const getData = async () => {
@@ -38,11 +37,11 @@ const WorkTime = () => {
         Promise.resolve(rows)
             .then((value) => {
                 let data = value.map((task) => {
-                    return task.doc
+                    return task.doc;
                 })
                 TimeOnWork(data);
             }, (error) => {
-                throw error
+                throw error;
             })
     }
 

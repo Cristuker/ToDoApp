@@ -1,10 +1,15 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import { ListItem, makeStyles, Container, Snackbar, Box } from '@material-ui/core';
+import { ListItem, makeStyles, Container, Snackbar, Box, Typography } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { showTodos } from '../../services/pouhdb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRedoAlt } from '@fortawesome/free-solid-svg-icons'
+import { faRedoAlt, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { updateTask } from '../../services/pouhdb';
+
+const Alert = (props) => {
+  return <MuiAlert elevation={1} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles({
   taskTitle: {
@@ -21,14 +26,14 @@ const useStyles = makeStyles({
   reopen: {
     cursor: 'pointer',
     width: '10px',
-    height: '10px',
+    height: '10px'
+  },
+  icon: {
+    top: '10rem',
+    textAlign: '-webkit-center',
+    marginTop: '13rem'
   }
 })
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 
 const Done = () => {
 
@@ -41,9 +46,10 @@ const Done = () => {
     const { rows } = await showTodos();
     Promise.resolve(rows)
       .then((value) => {
-        setTasks(value.map((task) => {
+        const data = value.map((task) => {
           return task.doc
-        }))
+        })
+        setTasks(data)
       }, (error) => {
         throw error
       })
@@ -53,6 +59,10 @@ const Done = () => {
   }, [])
 
   const handleReOpen = (task) => {
+    console.log('task',task)
+    task.status = 'pending';
+    task.allTime = 0;
+    delete task.startTime;
     updateTask(task)
     handleOpenSnackbar();
   }
@@ -64,14 +74,14 @@ const Done = () => {
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
-
-  return (<> 
-    {tasks.map((myTasks, i) => {// eslint-disable-line no-console
+  if (tasks.length) {
+  return (<>
+    {tasks.map((myTasks) => {
       if (myTasks.status === "done") {
         return (
-          <Box>
+          <Box >
             <ListItem className={classes.task} key={myTasks}>
-              <p className={classes.taskTitle}>{myTasks.title}</p>
+              <p  className={classes.taskTitle}>{myTasks.title}</p>
               <Container className={classes.reopen} onClick={() => handleReOpen(myTasks)} >
                 <FontAwesomeIcon icon={faRedoAlt} />
               </Container>
@@ -87,6 +97,17 @@ const Done = () => {
     })}
   </>
   )
+}else{
+  return (
+    <Typography>
+      <Container className={classes.icon}>
+      <FontAwesomeIcon size="4x" icon={faFolderOpen} />
+        <h1>Você ainda não terminou nenhuma tarefa...</h1>
+      </Container>
+    </Typography>
+  )
+}
+
 }
 
 export default Done;
