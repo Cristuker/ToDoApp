@@ -21,9 +21,9 @@ O que foi usado para contruir essa aplicação.
 ## Como rodar
 
 ### Pré-requisitos
-* NPM
-* Yarn
-* Node
+* [NPM](https://www.npmjs.com/)
+* [Yarn](https://yarnpkg.com/)
+* [Node.js](https://nodejs.org/en/)
 
 ```bash
 $ yarn //Para instalar as dependêncais
@@ -36,3 +36,5 @@ $ yarn start //Para rodar o projeto
 ```
 services/pouchdb.js
 ```
+
+<p align="center">Made whit ❤ by <strong><a href="http://linkedin.com/in/cristian-silva-dev" target="blank" >Cristian</></p></strong>
